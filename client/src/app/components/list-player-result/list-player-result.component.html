@@ -1,0 +1,13 @@
+<div id="display-results">
+    <ol type="1">
+        <li *ngFor="let player of listOfPlayersWithDetails">
+            <span>{{ player.username }}</span>
+            <ul>
+                <li *ngFor="let score of player.scores">Score: {{ score }}</li>
+            </ul>
+            <ul>
+                <li *ngFor="let bonus of player.bonusAmounts">Nombre de bonus accumulés: {{ bonus }}</li>
+            </ul>
+        </li>
+    </ol>
+</div>

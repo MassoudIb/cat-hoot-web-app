@@ -1,0 +1,10 @@
+<div class="container">
+    <h2>Jeux</h2>
+    <ul class="game-list">
+        <li *ngFor="let quiz of visibleQuizzes; let pos = index">
+            <button class="buttons" type="button" [class.active]="selectedIndex === pos" (click)="selectQuiz(quiz, pos)">
+                {{ quiz.title }}
+            </button>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,123 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=yes" />
+<div class="host-page-container">
+    <app-player-header id="host-header">
+        <div class="menu-wrapper-login">
+            <button type="button" class="menu-button" (click)="disconnectUser()">
+                <img src="./assets/logo-Cathoot.png" alt="Menu" />
+            </button></div
+    ></app-player-header>
+    <div id="question-container">
+        <div id="question"><b>Question actuelle</b> : {{ gameService.getCurrentQuestionText() }}</div>
+        <div id="points"><b>Pondération</b> : {{ gameService.getCurrentQuestionPoint() }} pts</div>
+        <div class="control-panel">
+            <button
+                class="toggle-timer-btn"
+                [disabled]="allPlayersAnswered"
+                [class.grayed-out]="allPlayersAnswered"
+                (click)="toggleTimer()"
+                [disabled]="allPlayersAnswered"
+            >
+                <img [src]="isTimerPaused ? 'assets/image/timer-play.png' : 'assets/image/timer-pause.png'" />
+            </button>
+
+            <div id="timer" class="timer-container">
+                <audio id="panicMode" src="assets/sounds/panic-sound.mp3"></audio>
+                <svg width="120" height="120">
+                    <circle
+                        cx="60"
+                        cy="60"
+                        r="54"
+                        stroke-width="12"
+                        fill="black"
+                        transform="rotate(-90 60 60)"
+                        [attr.stroke]="getCircleColor(gameService.time)"
+                        [attr.stroke-dasharray]="getCircleDashArray()"
+                        [attr.stroke-dashoffset]="getCircleDashOffset(gameService.time)"
+                    ></circle>
+                </svg>
+                <b class="time-text" [ngClass]="{ 'glowing-effect': gameService.time < 10 }" [@growShrink]="gameService.time">{{
+                    gameService.time
+                }}</b>
+            </div>
+            <div *ngIf="!isPanicModeOn" class="background-container">
+                <div class="button-overlay" *ngIf="!shouldShowPanicButton() || allPlayersAnswered"></div>
+                <div class="lever-switch-container">
+                    <button
+                        id="panic-button"
+                        class="lever-button button-face"
+                        (click)="activatePanicMode()"
+                        [class.pressed]="isPanicModeOn"
+                        [disabled]="isPanicModeOn || !shouldShowPanicButton() || allPlayersAnswered"
+                    >
+                        Panique
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="isPanicModeOn" class="loader"></div>
+        </div>
+    </div>
+    <div>
+        <button class="button-nextToQuestion" [disabled]="!gameService.isReadyToMoveNextQuestion()" (click)="openDialogboxNextQuestion()">
+            <b>Passer à la question suivante</b>
+        </button>
+        <div *ngIf="gameService.isLastQuestion()">
+            <button class="button-nextToQuestion" (click)="gameFinished()">Aller à la vue des résultats</button>
+        </div>
+
+        <div class="host-container">
+            <div class="content-container">
+                <div class="stat-area">
+                    <app-histogram [result]="gameService.result"></app-histogram>
+                </div>
+
+                <div class="chat-box">
+                    <app-player-chat
+                        [usernameChat]="gameService.organizerName"
+                        [roomCode]="gameService.roomCode"
+                        [roomMessages]="roomMessages"
+                    ></app-player-chat>
+                </div>
+            </div>
+            <div class="player-list">
+                <button class="button-sortPlayers" (click)="playerInteractionService.sortPlayersByName()" (click)="toggleIsNameAscending()">
+                    NOM
+                    <img *ngIf="playerInteractionService.isNameAscending" src="assets/image/sort-ascending.png" alt="Sort Ascending" />
+                    <img *ngIf="!playerInteractionService.isNameAscending" src="assets/image/sort-descending.png" alt="Sort Descending" />
+                </button>
+                <button class="button-sortPlayers" (click)="playerInteractionService.sortPlayersByScore()" (click)="toggleIsScoreAscending()">
+                    POINTAGE
+                    <img *ngIf="playerInteractionService.isScoreAscending" src="assets/image/sort-ascending.png" alt="Sort Ascending" />
+                    <img *ngIf="!playerInteractionService.isScoreAscending" src="assets/image/sort-descending.png" alt="Sort Descending" />
+                </button>
+                <button
+                    class="button-sortPlayers"
+                    (click)="playerInteractionService.sortPlayersByColorState()"
+                    (click)="toggleIsColorStateAscending()"
+                >
+                    ÉTAT
+                    <img *ngIf="playerInteractionService.isColorStateAscending" src="assets/image/sort-ascending.png" alt="Sort Ascending" />
+                    <img *ngIf="!playerInteractionService.isColorStateAscending" src="assets/image/sort-descending.png" alt="Sort Descending" />
+                </button>
+                <h3>Liste des joueurs :</h3>
+                <div *ngFor="let player of playerInteractionService.listOfPlayers" class="player" [ngClass]="{ 'strike-through': !player.isPlaying }">
+                    <span [ngStyle]="{ 'background-color': player.colorState }">{{ player.name }}</span>
+                    <span [ngStyle]="{ 'background-color': player.colorState }">{{ player.score }}</span>
+                    <button
+                        class="chat-handler-button"
+                        *ngIf="player.isAllowedToChat"
+                        (click)="playerInteractionService.handleChatPrivilege(player, false)"
+                    >
+                        CHUTE
+                    </button>
+                    <button
+                        class="chat-handler-button"
+                        *ngIf="!player.isAllowedToChat"
+                        (click)="playerInteractionService.handleChatPrivilege(player, true)"
+                    >
+                        DE-CHUTE
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

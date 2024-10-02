@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="content">
+        <div class="question">{{ questionTitle }}</div>
+        <div class="response">
+            <p>
+                {{ currentAnswer.username }} a répondu: <span>{{ currentAnswer.answer }}</span>
+            </p>
+        </div>
+
+        <div class="prompt">
+            <p>Veuillez noter cette réponse à l'aide de ces pondérations:</p>
+        </div>
+
+        <div class="choices">
+            <button type="button" class="choice-button" (click)="incrementZero()" [class.active]="currentScore === 0">0%</button>
+            <button type="button" class="choice-button" (click)="increment50()" [class.active]="currentScore === currentAnswer.point * 0.5">
+                50%
+            </button>
+            <button type="button" class="choice-button" (click)="increment100()" [class.active]="currentScore === currentAnswer.point">100%</button>
+        </div>
+
+        <div class="submit">
+            <button type="button" class="submit-button" (click)="submitCorrection()">SOUMETTRE</button>
+        </div>
+    </div>
+</div>

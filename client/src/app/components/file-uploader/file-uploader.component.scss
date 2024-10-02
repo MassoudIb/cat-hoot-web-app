@@ -1,0 +1,57 @@
+$borderlightBlue: rgb(0, 126, 143);
+$greyed: #aaa;
+
+.import-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+input {
+    display: none;
+}
+
+.imported-game {
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+.upload-buttons {
+    position: relative;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    background-image: linear-gradient(45deg, #6e45e2 0%, #88d3ce 100%);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+
+    &:hover {
+        box-shadow: 0 12px 10px rgba(0, 0, 0, 0.3);
+        transform: scale(1.05);
+        background-image: linear-gradient(to right, #00eeff, #b67eff);
+    }
+
+    &:active {
+        transform: scale(0.95);
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+        background-image: linear-gradient(to right, #6319bc, #ff7eb3);
+    }
+}
+
+.bold-blue {
+    font-weight: bold;
+    color: $borderlightBlue;
+}
+.allowed-types {
+    color: $greyed;
+}
+.error-alert {
+    color: red;
+}

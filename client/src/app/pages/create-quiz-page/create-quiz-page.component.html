@@ -1,0 +1,117 @@
+<form [formGroup]="quizForm" (ngSubmit)="onSubmit()" class="quiz-form">
+    <div class="form-content">
+        <h1 class="create-quiz-title">Création de quiz</h1>
+        <input
+            formControlName="title"
+            placeholder="Nom du jeu"
+            [ngClass]="{
+                'input-valid': quizForm.controls['title'].valid && quizForm.controls['title'].touched,
+                'input-invalid': quizForm.controls['title'].invalid && quizForm.controls['title'].touched
+            }"
+        />
+        <input
+            formControlName="description"
+            placeholder="Description"
+            [ngClass]="{
+                'input-valid': quizForm.controls['description'].valid && quizForm.controls['description'].touched,
+                'input-invalid': quizForm.controls['description'].invalid && quizForm.controls['description'].touched
+            }"
+        />
+        <input
+            formControlName="duration"
+            type="number"
+            placeholder="Temps alloué (sec)"
+            (blur)="validateTime()"
+            [ngClass]="{
+                'input-valid': quizForm.controls['duration'].valid && quizForm.controls['duration'].touched,
+                'input-invalid': quizForm.controls['duration'].invalid && quizForm.controls['duration'].touched
+            }"
+            (blur)="validateTime()"
+        />
+        <div *ngIf="quizForm.get('title')?.errors?.titleExists" class="error-message">Ce jeu existe déjà! Veuillez choisir un autre.</div>
+        <div *ngIf="quizForm.get('duration')?.errors?.min || quizForm.get('duration')?.errors?.max" class="error-message">
+            Le temps doit être dans l'intervalle [10 à 60] secondes.
+        </div>
+        <div formArrayName="questions">
+            <div *ngFor="let question of questions.controls; let i = index" [formGroupName]="i" class="truncated-input">
+                <div *ngIf="question.get('text')?.invalid && question.get('text')?.touched" class="error-message">
+                    Une question au minimum est requise.
+                </div>
+                <div *ngIf="question.get('points')?.touched && question.get('points')?.errors?.required" class="error-message">
+                    Le score est requis.
+                </div>
+                <div class="question-number">Question {{ i + 1 }}</div>
+                <div class="question-item">
+                    <input
+                        formControlName="text"
+                        placeholder="Votre question"
+                        class="question-input"
+                        [ngClass]="{
+                            'input-valid': question.get('text')?.valid && question.get('text')?.touched,
+                            'input-invalid': question.get('text')?.invalid && question.get('text')?.touched
+                        }"
+                    />
+                    <div
+                        class="toggle-container"
+                        [class.is-qcm]="question.get('type')?.value === 'QCM'"
+                        (click)="toggleQuestionType(i, question.get('type')?.value === 'QCM' ? 'QRL' : 'QCM')"
+                    >
+                        <span class="toggle-label qcm-label">QRL</span>
+                        <span class="toggle-button"></span>
+                        <span class="toggle-label qrl-label">QCM</span>
+                    </div>
+                    <button type="button" class="tab-button" title="import" (click)="importQuestion(i)">Importer</button>
+                    <button type="button" class="tab-button" title="export" (click)="exportQuestion(i)">Exporter</button>
+                    <button type="button" class="move-btn up-btn" (click)="moveQuestionUp(i, $event)" *ngIf="i > 0"></button>
+                    <button type="button" class="move-btn down-btn" (click)="moveQuestionDown(i, $event)" *ngIf="i < questions.length - 1"></button>
+                    <label for="points-select-{{ i }}" class="points-label">Score alloué:</label>
+                    <select formControlName="points">
+                        <option value="">Score</option>
+                        <option *ngFor="let points of pointsOptions" [value]="points">{{ points }}</option>
+                    </select>
+                </div>
+                <div *ngIf="question.get('type')?.value === 'QCM'" formArrayName="choices">
+                    <div *ngFor="let choice of getAnswerChoices(question).controls; let choiceIndex = index" [formGroupName]="choiceIndex">
+                        <div class="choice-number">Choix {{ choiceIndex + 1 }}</div>
+                        <input
+                            formControlName="text"
+                            placeholder="Choix de réponses"
+                            [ngClass]="{
+                                'input-valid': choice.get('text')?.valid && choice.get('text')?.touched,
+                                'input-invalid': choice.get('text')?.invalid && choice.get('text')?.touched
+                            }"
+                        />
+                        <button type="button" class="delete-answer-choice" (click)="deleteAnswerChoice(question, choiceIndex)"></button>
+                        <button
+                            type="button"
+                            class="move-btn choice-up"
+                            *ngIf="choiceIndex > 0"
+                            (click)="moveChoiceUp(i, choiceIndex, $event)"
+                        ></button>
+                        <button
+                            type="button"
+                            class="move-btn choice-down"
+                            *ngIf="choiceIndex < getAnswerChoices(question).length - 1"
+                            (click)="moveChoiceDown(i, choiceIndex, $event)"
+                        ></button>
+                        <div class="toggle-container" [class.is-correct]="choice.get('isCorrect')?.value" (click)="toggleChoice(i, choiceIndex)">
+                            <span class="toggle-label true-label">Vrai</span>
+                            <span class="toggle-button"></span>
+                            <span class="toggle-label false-label">Faux</span>
+                        </div>
+                    </div>
+                    <div *ngIf="question.get('choices')?.errors?.correctIncorrect" class="error-message">
+                        {{ question.get('choices')?.errors?.correctIncorrect }}
+                    </div>
+                    <button type="button" (click)="addAnswerChoice(i)" class="choice-button" *ngIf="getAnswerChoices(question).length < 4">
+                        Ajouter des choix de réponses
+                    </button>
+                </div>
+
+                <button (click)="deleteQuestion(i)" class="delete-button">Supprimer la question {{ i + 1 }}</button>
+            </div>
+        </div>
+        <button (click)="addQuestion()" class="add-button">Ajouter une question</button>
+        <button type="submit" class="choice-button">Enregistrer le jeu</button>
+    </div>
+</form>

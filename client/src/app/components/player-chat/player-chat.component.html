@@ -1,0 +1,53 @@
+<div class="chat-container">
+    <!-- Chat Header -->
+    <div class="chat-header">
+        <h2>{{ isOrganizer ? 'Organisateur' : usernameChat }}</h2>
+    </div>
+
+    <!-- Messages Display Area -->
+    <div class="messages-container">
+        <ul>
+            <li *ngFor="let message of roomMessages">
+                <div
+                    class="message"
+                    [ngClass]="{
+                        'notification-message': message.isNotification,
+                        'sent-message': message.isSent && !message.isNotification,
+                        'received-message': !message.isSent && !message.isNotification
+                    }"
+                    class="message"
+                >
+                    <strong
+                        [ngClass]="{
+                            'organisateur-message': message.username === 'Organisateur' && !message.isNotification,
+                            'default-message': message.username !== 'Organisateur' && !message.isNotification,
+                            'notification-username': message.isNotification
+                        }"
+                    >
+                        {{ message.username }}
+                    </strong>
+
+                    <p>{{ message.message }}</p>
+                    <span class="timestamp">{{ message.timeStamp | date: 'shortTime' }}</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Message Sending Form -->
+    <div class="send-message-form">
+        <div class="input-container">
+            <input
+                type="text"
+                [(ngModel)]="currentMessage"
+                placeholder="Écrivez votre message ici..."
+                maxlength="200"
+                (keyup.enter)="sendMessage()"
+            />
+            <span class="char-count">{{ currentMessage.length }}/200</span>
+        </div>
+        <button (click)="sendMessage()" class="send-button">
+            <img src="./assets/image/send-variant.png" alt="Send" />
+        </button>
+    </div>
+</div>

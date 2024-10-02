@@ -1,0 +1,153 @@
+@keyframes fadeInScaleUp {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    background-image: url('../../../assets/image/Background3.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
+    position: relative;
+}
+
+.main-container {
+    margin-top: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    border-radius: 60px;
+    box-shadow: 0 4px 8px rgba(29, 204, 244, 0.846);
+    width: 50%;
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+.logo-header {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 150px;
+}
+
+.logo-title {
+    width: 80%;
+    margin-top: 50px;
+    animation: fadeInScaleUp 1.5s ease-out forwards;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0px;
+    padding: 20px;
+}
+
+.button + .button {
+    margin-top: 20px;
+}
+
+.button {
+    width: 155%;
+    margin-left: -40px;
+    padding: 20px;
+    border: none;
+    border-radius: 35px;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    background-image: linear-gradient(to right, #6e45e2, #88d3ce);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.27);
+    transition: all 0.3s ease;
+    animation: slideInFromBottom 0.8s ease-out forwards;
+
+    &:hover {
+        box-shadow: 0 12px 10px rgba(0, 0, 0, 0.3);
+        transform: scale(1.05);
+        background-image: linear-gradient(to right, #00eeff, #b67eff);
+    }
+
+    &:active {
+        transform: scale(0.95);
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+        background-image: linear-gradient(to right, #6319bc, #ff7eb3);
+    }
+
+    &:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+    }
+    &:hover:not(:disabled) {
+        background-color: #0056b3;
+    }
+}
+
+.ripple {
+    border-radius: 50%;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.7);
+    transform: scale(0);
+    opacity: 0;
+    animation: ripple-animation 600ms linear;
+    pointer-events: none;
+}
+
+.footer-item {
+    text-align: center;
+    margin-top: auto;
+
+    background-color: #f8f9fa;
+    width: 100%;
+}
+
+.team-name {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.footer-item p {
+    margin-bottom: 10px;
+
+    span {
+        &:nth-child(odd) {
+            color: #007bff;
+        }
+        &:nth-child(even) {
+            color: #0056b3;
+        }
+    }
+}

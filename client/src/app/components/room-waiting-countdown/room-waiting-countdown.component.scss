@@ -1,0 +1,43 @@
+.dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    background-image: url('./../../../assets/image/Background8.png');
+    background-position: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    height: 70%;
+}
+
+#code {
+    font-size: 16px;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+
+    &:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    }
+}
+
+p {
+    color: rgb(219, 34, 34);
+}
+
+.loader {
+    width: 20px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid;
+    border-color: #000 #0000;
+    animation: l1 1s infinite;
+}
+@keyframes l1 {to{transform: rotate(.5turn)}}

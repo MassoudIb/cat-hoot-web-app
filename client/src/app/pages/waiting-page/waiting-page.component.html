@@ -1,0 +1,57 @@
+<div class="background" *ngIf="!hasUsername">
+    <div class="menu-wrapper-login">
+        <button type="button" class="menu-button" (click)="disconnectUser()">
+            <img src="./assets/logo-Cathoot.png" alt="Menu" />
+        </button>
+    </div>
+    <div class="waiting-login">
+        <div class="login-container">
+            <div class="title-container">
+                <h1 class="login-title">Veuillez rentrer votre pseudonyme</h1>
+            </div>
+            <form [formGroup]="loginForm" (ngSubmit)="validateUsername()" class="login-form">
+                <div class="input-container">
+                    <input type="username" formControlName="username" placeholder="Nom de joueur" class="username-input" />
+                </div>
+                <div *ngIf="!isUsernameValid" class="error-message">Nom d'utilisateur non disponible</div>
+                <button type="submit" class="login-button">Connexion</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="main-container" *ngIf="hasUsername">
+    <header class="header">
+        <div class="menu-wrapper">
+            <button type="button" class="menu-button" (click)="disconnectUser()">
+                <img src="./assets/logo-Cathoot.png" alt="Menu" />
+            </button>
+        </div>
+        <div class="title-container">
+            <div class="title">
+                <h1>{{ title }}</h1>
+            </div>
+        </div>
+    </header>
+    <div class="game-info-container">
+        <div class="players-container">
+            <ul class="players-list">
+                <li class="list-title">Liste de joueurs</li>
+                <li *ngFor="let player of listOfPlayers; let pos = index">
+                    {{ pos + 1 + ') ' + player }}
+                    <marquee behavior="scroll" direction="right">
+                        <img src="assets/image/when-chubby-cats-escape-cat.gif" alt="Cute Cat" style="width: 50px; height: auto" />
+                    </marquee>
+                </li>
+            </ul>
+        </div>
+        <div class="room-code">
+            <h1>Code du jeu: {{ roomCode }}</h1>
+        </div>
+
+        <div class="chat-container">
+            <app-player-chat [usernameChat]="username" [roomCode]="roomCode" [roomMessages]="roomMessages"></app-player-chat>
+        </div>
+        <img src="assets/image/peach-goma.gif" class="bottom-left-cat" alt="Walking Cat" />
+    </div>
+</div>

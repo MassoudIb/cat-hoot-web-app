@@ -1,0 +1,70 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    margin-right: 45px;
+}
+
+h2 {
+    text-align: center;
+    margin-left: 40px;
+}
+
+.game-list {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    list-style-type: none;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 65px;
+    padding: 15px 25px;
+    border: unset;
+    border-radius: 5px;
+    color: #212121;
+    z-index: 1;
+    background: #e8e8e8;
+    position: relative;
+    font-weight: 1000;
+    font-size: 17px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    transition: all 250ms;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: #fce2cd;
+    z-index: -1;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    transition: all 250ms;
+}
+
+.buttons.active,
+button:disabled {
+    background-color: #212121;
+    color: #e8e8e8;
+    pointer-events: none;
+    cursor: default;
+}
+
+.buttons:not(.active):hover {
+    cursor: pointer;
+}
+
+button:hover::before {
+    width: 100%;
+}

@@ -1,0 +1,50 @@
+#container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.scoreboard{
+    flex: 0 0 auto;
+    height: 60px;
+    display: flex;
+    background-color: #d6ae56;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 4px solid #965c26;
+    border-top-left-radius: 26px;
+    border-top-right-radius: 26px;
+}
+
+.points-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-bottom-left-radius: 26px;
+    border-bottom-right-radius: 26px;
+    font-family: 'Comic Sans MS', cursive;
+    height: 60px;
+}
+
+#point {
+    font-size: 8vw;
+}
+
+
+#pts {
+    font-size: 2vw;
+    padding-bottom: 35%;
+}
+
+@media (min-width: 768px) {
+    #point {
+        font-size: 6vw;
+    }
+
+    #pts {
+        font-size: 1.5vw;
+    }
+}

@@ -1,0 +1,52 @@
+<div id="container">
+    <h1 class="historique-title">Historique</h1>
+    <table class="games-table">
+        <thead>
+            <tr>
+                <th>
+                    Titre
+                    <img
+                        src="assets/image/sort-ascending.png"
+                        *ngIf="sortByName === 'quizName' && sortOrderName === 'desc'"
+                        (click)="loadHistory('quizName', 'asc')"
+                        alt="Sort Descending"
+                    />
+                    <img
+                        src="assets/image/sort-descending.png"
+                        *ngIf="sortByName === 'quizName' && sortOrderName === 'asc'"
+                        (click)="loadHistory('quizName', 'desc')"
+                        alt="Sort Ascending"
+                    />
+                </th>
+                <th>
+                    Date
+                    <img
+                        src="assets/image/sort-clock-ascending.png"
+                        *ngIf="sortByTime === 'startTime' && sortOrderTime === 'desc'"
+                        (click)="loadHistory('startTime', 'asc')"
+                        alt="Sort Descending"
+                    />
+                    <img
+                        src="assets/image/sort-clock-descending.png"
+                        *ngIf="sortByTime === 'startTime' && sortOrderTime === 'asc'"
+                        (click)="loadHistory('startTime', 'desc')"
+                        alt="Sort Ascending"
+                    />
+                </th>
+                <th>Nombres de Joueurs</th>
+                <th>Meilleur Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let entry of gameHistory">
+                <td>{{ entry.quizName }}</td>
+                <td>{{ entry.startTime | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                <td>{{ entry.playerCount }}</td>
+                <td>{{ entry.topScore }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="deleteHistory">
+        <button (click)="resetHistory()">Supprimer l'historique</button>
+    </div>
+</div>

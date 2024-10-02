@@ -1,0 +1,432 @@
+.quiz-form {
+    background-image: url('../../../assets/image/Background7.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+}
+.form-content {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 0px;
+    border-radius: 8px;
+    width: 95%;
+    margin: auto;
+}
+.create-quiz-title {
+    position: relative;
+    font-size: 3rem;
+    color: #8b3be0;
+    background: -webkit-linear-gradient(#532cdf, #b30c89);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 50px;
+    text-shadow: 10px 10px 10px rgba(150, 150, 150, 0.5);
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+input[type='text'] {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+input {
+    width: 20%;
+    font-size: 15px;
+    padding: 12px 10px;
+    margin: 0px 40px 20px 50px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.input-valid {
+    border: 3px solid green;
+    background-color: rgba(0, 255, 0, 0.315);
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    background-image: url('../../../assets/image/checkbox-marked-circle.png');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 25px;
+    border-radius: 15px;
+}
+
+.input-invalid {
+    border: 3px solid red;
+    background-color: rgba(255, 0, 0, 0.2);
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+    background-image: url('../../../assets/image/alpha-x-circle.png');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 25px;
+    border-radius: 15px;
+}
+.error-message {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: -2px;
+    margin-bottom: 10px;
+    margin-left: 35px;
+}
+
+select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url('../../../assets/image/dropdown_arrow.png');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+}
+
+select[formControlName='points'] {
+    font-size: 1.3rem;
+    padding: 10px 15px;
+    width: 15%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+}
+
+.choice-button {
+    width: 20%;
+    margin-left: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    background-image: linear-gradient(to right, #6e45e2, #1411dc);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.27);
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 12px 10px rgba(0, 0, 0, 0.3);
+        transform: scale(1.05);
+        background-image: linear-gradient(to right, #4177e2, #b67eff);
+    }
+
+    &:active {
+        transform: scale(0.95);
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+        background-image: linear-gradient(to right, #6319bc, #ff7eb3);
+    }
+}
+
+.delete-button {
+    width: 20%;
+    margin-left: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    background-image: linear-gradient(to right, #ff4e50, #b74a0b);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.27);
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 12px 10px rgba(0, 0, 0, 0.3);
+        transform: scale(1.05);
+        background-image: linear-gradient(to right, #ff416c, #ff4b2b);
+    }
+
+    &:active {
+        transform: scale(0.95);
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+        background-image: linear-gradient(to right, #ff416c, #ff4b2b);
+    }
+}
+
+.add-button {
+    width: 20%;
+    margin-left: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    background-image: linear-gradient(to right, #11998e, #13d633);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.27);
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 12px 10px rgba(0, 0, 0, 0.3);
+        transform: scale(1.05);
+        background-image: linear-gradient(to right, #56ab2f, #a8e063);
+    }
+
+    &:active {
+        transform: scale(0.95);
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+        background-image: linear-gradient(to right, #56ab2f, #a8e063);
+    }
+}
+
+.move-btn {
+    margin-right: 5px;
+    margin-left: 15px;
+    font-size: 18px;
+    padding: 12.5px 12.5px;
+    cursor: pointer;
+    background-color: #ffffff;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.move-btn:hover {
+    background-color: #04ff00;
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+.up-btn {
+    background-image: url('../../../assets/image/arrow-up-bold-circle.png');
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+
+.down-btn {
+    background-image: url('../../../assets/image/arrow-down-bold-circle.png');
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+
+.import-button {
+    background-repeat: no-repeat;
+    background-size: 25px;
+    margin-right: 10px;
+    width: 30px;
+    height: 25px;
+    border: none;
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.import-button:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+}
+
+.tab-button {
+    background: linear-gradient(145deg, rgba(122, 24, 215, 0.8), rgba(75, 0, 130, 0.8));
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-size: large;
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    transition:
+        background-color 0.3s,
+        box-shadow 0.2s;
+}
+
+.tab-button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.4), transparent);
+    transition: all 0.5s ease;
+    border-radius: 34px;
+    transform: rotate(30deg);
+    z-index: 0;
+}
+
+.tab-button:hover::before {
+    top: -60%;
+    left: -60%;
+    right: -60%;
+    bottom: -60%;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.6), transparent);
+}
+
+.tab-button:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.tab-button:active {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transform: translateY(4px);
+}
+
+.export-button:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+}
+
+.question-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.question-input {
+    width: 30%;
+    margin-right: 10px;
+}
+
+.question-number {
+    font-size: large;
+    font-weight: bold;
+    margin-right: 10px;
+    margin-left: 50px;
+}
+
+.choice-text-input {
+    width: auto;
+    padding: 8px;
+    margin: 0px 10px 0px 50px;
+}
+.choice-number {
+    font-size: large;
+    font-weight: bold;
+    margin-right: 10px;
+    margin-left: 50px;
+}
+
+.choice-up {
+    background-image: url('../../../assets/image/arrow-up-bold-circle.png');
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+
+.choice-down {
+    background-image: url('../../../assets/image/arrow-down-bold-circle.png');
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+
+.delete-answer-choice {
+    border: none;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    background-image: url('../../../assets/image/trash_icon.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    margin-right: 5px;
+    margin-left: 15px;
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+}
+.delete-answer-choice:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+.truncated-input {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.toggle-container {
+    margin-left: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100px;
+    height: 30px;
+    background-color: #ab7cf6;
+    border-radius: 50px;
+    position: relative;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.toggle-label {
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+}
+
+.toggle-button {
+    background-color: white;
+    position: absolute;
+    top: 4px;
+    bottom: 2px;
+    left: 2px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    transition: left 0.3s ease;
+}
+
+.is-correct .toggle-button {
+    left: calc(100% - 28px);
+}
+
+.is-correct {
+    background-color: #6c2896;
+}
+
+.true-label {
+    display: none;
+}
+
+.is-correct .true-label {
+    display: block;
+}
+
+.false-label {
+    display: block;
+}
+
+.is-correct .false-label {
+    display: none;
+}
+
+.is-qcm .toggle-button {
+    left: calc(100% - 28px);
+}
+
+.is-qcm {
+    background-color: #0022ff;
+}
+
+.qcm-label {
+    display: block;
+}
+
+.is-qcm .qcm-label {
+    display: none;
+}
+
+.qrl-label {
+    display: none;
+}
+
+.is-qcm .qrl-label {
+    display: block;
+}

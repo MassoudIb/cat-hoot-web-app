@@ -1,0 +1,68 @@
+<div class="admin-login" *ngIf="!isLoggedIn">
+    <button type="button" class="menu-button" routerLink="/">
+        <img src="./assets/logo-Cathoot.png" alt="Menu" />
+    </button>
+    <div class="login-container">
+        <div class="title-container">
+            <img src="assets/image/cat_logo.jpg" alt="Left Cat Icon" class="cat-icon" />
+            <h1 class="login-title">Portal admin</h1>
+            <img src="assets/image/cat_logo.jpg" alt="Right Cat Icon" class="cat-icon" />
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="submitPassword()" class="login-form">
+            <div class="input-container" [class.invalid]="!isPasswordValid">
+                <i class="lock-icon"></i>
+                <input type="password" formControlName="password" placeholder="Type your password" class="password-input" />
+            </div>
+            <div *ngIf="!isPasswordValid" class="error-message">Mot de passe invalide.</div>
+            <button type="submit" class="login-button">Connexion</button>
+        </form>
+    </div>
+</div>
+
+<div class="admin-header" *ngIf="isLoggedIn">
+    <img src="assets/image/logo_withTitle.jpg" alt="Cat Icon" class="cat-icon" />
+    <div class="header-buttons">
+        <h1 class="login-title">Administration</h1>
+        <button (click)="goToMainPage()" routerLink="/home">Page principale</button>
+        <button (click)="goToQuestionBank()">Banque de questions</button>
+        <button (click)="goToCreateQuiz()">Creation d'un quiz</button>
+        <button (click)="goToHistory()">Historique</button>
+    </div>
+</div>
+
+<div class="admin-content" *ngIf="isLoggedIn">
+    <h2>Liste de quiz disponibles:</h2>
+    <table class="games-table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Date</th>
+                <th>Visibilité</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let quiz of quizzes$ | async">
+                <td>{{ quiz.title }}</td>
+                <td>{{ quiz.lastModification | date: 'medium' }}</td>
+                <td>
+                    <img
+                        src="assets/image/eye_icon.jpg"
+                        alt="Visibility"
+                        class="action-icon"
+                        [style.opacity]="quiz.isVisible ? '1' : '0.5'"
+                        (click)="toggleVisibility(quiz)"
+                    />
+                </td>
+                <td>
+                    <img src="assets/image/edit_icon.jpg" alt="Edit" class="action-icon" (click)="modifyQuiz(quiz)" />
+                    <img src="assets/image/download-circle.png" alt="Upload" class="action-icon" (click)="exportGame(quiz)" />
+                    <img src="assets/image/trash_icon.jpg" alt="Delete" class="action-icon" (click)="deleteGame(quiz)" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <app-file-uploader></app-file-uploader>
+    </div>
+</div>

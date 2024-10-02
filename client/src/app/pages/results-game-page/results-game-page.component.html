@@ -1,0 +1,51 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<div class="results-page-container">
+    <audio id="podiumSound" src="assets/sounds/podium.mp3"></audio>
+    <app-player-header id="player-header"></app-player-header>
+    <h1 class="page-title">Résultats</h1>
+    <div class="content-container">
+        <div class="left-panel">
+            <div class="tabs">
+                <button class="tab-button" [class.active]="activeTab === 'Podium'" (click)="openTab('Podium')">Podium</button>
+                <button class="tab-button" [class.active]="activeTab === 'Histogrammes'" (click)="openTab('Histograms')">Histogrammes</button>
+            </div>
+
+            <div id="Podium" class="tab-content" *ngIf="activeTab === 'Podium' && sortedListOfPlayersWithDetails?.length">
+                <div class="podium">
+                    <img src="assets/image/cat-podium.png" alt="Podium" class="podium-image" />
+                    <div class="podium-base first-place rise" *ngIf="sortedListOfPlayersWithDetails.length > 0">
+                        <img src="assets/image/podium-1.gif" alt="First place cat" />
+                        <p>{{ sortedListOfPlayersWithDetails[0].username }}</p>
+                    </div>
+                    <div class="podium-base second-place rise" *ngIf="sortedListOfPlayersWithDetails.length > 1">
+                        <img src="assets/image/podium-2.gif" alt="Second place cat" />
+                        <p>{{ sortedListOfPlayersWithDetails[1].username }}</p>
+                    </div>
+                    <div class="podium-base third-place rise" *ngIf="sortedListOfPlayersWithDetails.length > 2">
+                        <img src="assets/image/podium-3.gif" alt="Third place cat" />
+                        <p>{{ sortedListOfPlayersWithDetails[2].username }}</p>
+                    </div>
+                </div>
+                <app-list-player-result [listOfPlayersWithDetails]="sortedListOfPlayersWithDetails"></app-list-player-result>
+            </div>
+
+            <div id="Histograms" class="tab-content" *ngIf="activeTab === 'Histograms'">
+                <app-histogram [result]="gameService.result"></app-histogram>
+                <div class="button-container">
+                    <button class="button-img previous-btn" (click)="viewResultFromPreviousQuestion()">
+                        <img src="assets/image/arrow-left-bold-circle-outline.png" alt="Précédent" />
+                    </button>
+                    <button class="button-img next-btn" (click)="viewResultFromNextQuestion()">
+                        <img src="assets/image/arrow-right-bold-circle-outline.png" alt="Suivant" />
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <app-player-chat id="player-chat" [usernameChat]="username" [roomCode]="roomCode" [roomMessages]="roomMessages"></app-player-chat>
+            <button class="menu-button" (click)="disconnectUser()">Menu</button>
+        </div>
+    </div>
+</div>

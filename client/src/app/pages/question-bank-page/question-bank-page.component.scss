@@ -1,0 +1,256 @@
+#edit-modification {
+    border-radius: 8px;
+    background-color: #e7dbdb;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.arrow-icon {
+    width: 35px;
+    vertical-align: middle;
+}
+
+#buttons-filter {
+    button {
+        padding: 10px 20px;
+        margin: 0 14px;
+        margin-bottom: 40px;
+        border: none;
+        border-radius: 15px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+        outline: none;
+        background-image: linear-gradient(to right, #6e45e2, #88d3ce);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.27);
+        transition: all 0.3s ease;
+
+        &:hover {
+            box-shadow: 0 12px 10px rgba(0, 0, 0, 0.3);
+            transform: scale(1.05);
+            background-image: linear-gradient(to right, #00eeff, #b67eff);
+        }
+    }
+}
+#buttons-filter button.active {
+    transform: scale(0.95);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    background-image: linear-gradient(to right, #6319bc, #ff7eb3);
+}
+
+#button-openModify > button {
+    margin-bottom: 40px;
+    border: none;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    outline: none;
+    background-image: linear-gradient(to right, #6d58a7, #42c2b9);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.27);
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 12px 10px rgba(0, 0, 0, 0.3);
+        transform: scale(1.05);
+        background-image: linear-gradient(to right, #00eeff, #b67eff);
+    }
+}
+
+#button-openModify > button.active {
+    transform: scale(0.95);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    background-image: linear-gradient(to right, #6319bc, #ff7eb3);
+    content: "Création d'une question [↑]";
+}
+
+.select-points {
+    width: 10px;
+}
+
+.align-center {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.align-center b {
+    margin-right: 10px;
+}
+
+.question-bank-form {
+    background-image: url('../../../assets/image/Background9.png');
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.question-title {
+    position: relative;
+    font-size: 3rem;
+    color: #8b3be0;
+    background: -webkit-linear-gradient(#532cdf, #b30c89);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 50px;
+    text-shadow: 10px 10px 10px rgba(150, 150, 150, 0.5);
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+.question-item {
+    background: #fff;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 15px;
+    transition: box-shadow 0.3s ease;
+    opacity: 0.9;
+}
+
+.question-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.add-question-section {
+    background-color: #ced4da;
+    border: 4px solid #bdc2c5;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    opacity: 0.85;
+}
+
+.add-question-section > form > div {
+    margin-bottom: 20px;
+}
+
+.question-bank-form h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #333;
+    font-size: 2rem;
+}
+
+.question-bank-form input[type='text'],
+.question-bank-form select {
+    width: calc(100% - 40px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.choices {
+    display: flex;
+    align-items: center;
+}
+
+.choices input,
+.choices button,
+.choices b {
+    margin-right: 10px;
+}
+
+.choices .button-delete-choice {
+    width: auto;
+    padding: 5px 10px;
+    color: white;
+    border-radius: 4px;
+}
+
+.choices .button-delete-choice:hover {
+    background-color: #da665d;
+}
+
+.question-item .button-delete-choice:hover {
+    background-color: #da665d;
+}
+
+.question-bank-form button {
+    display: block;
+    width: 60%;
+    padding: 12px;
+    margin: 10px auto;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+    text-align: center;
+}
+
+.question-bank-form button:hover {
+    background-color: #4cae4c;
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100px;
+    height: 30px;
+    background-color: #ab7cf6;
+    border-radius: 50px;
+    position: relative;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.toggle-label {
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+}
+
+.toggle-button {
+    background-color: white;
+    position: absolute;
+    top: 4px;
+    bottom: 2px;
+    left: 2px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    transition: left 0.3s ease;
+}
+
+.is-qcm .toggle-button {
+    left: calc(100% - 28px);
+}
+
+.is-qcm {
+    background-color: #4e63eb;
+}
+
+.qcm-label {
+    display: block;
+}
+
+.is-qcm .qcm-label {
+    display: none;
+}
+
+.qrl-label {
+    display: none;
+}
+
+.is-qcm .qrl-label {
+    display: block;
+}
+
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+}

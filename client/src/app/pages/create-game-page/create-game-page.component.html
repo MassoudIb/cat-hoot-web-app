@@ -1,0 +1,43 @@
+<div class="main-container">
+    <header class="header">
+        <div class="menu-wrapper">
+            <button type="button" class="menu-button" routerLink="/">
+                <img src="./assets/logo-Cathoot.png" alt="Menu" />
+            </button>
+        </div>
+        <div class="title-container">
+            <div class="title">
+                <h1>{{ title }}</h1>
+            </div>
+        </div>
+    </header>
+    <div class="content">
+        <section class="game-details" *ngIf="displayedQuiz">
+            <h2>Détails</h2>
+            <div class="details">
+                <p>{{ displayedQuiz.description }}</p>
+                <p>Temps par question: {{ displayedQuiz.duration }} secondes</p>
+                <p *ngIf="!isQuizRandom">Questions:</p>
+                <ul *ngIf="!isQuizRandom">
+                    <li *ngFor="let question of displayedQuiz.questions; let pos = index">{{ pos + 1 + ') ' + question.text }}</li>
+                </ul>
+            </div>
+        </section>
+        <section class="app-game-bank">
+            <app-game-bank [quizToDelete]="unavailableQuiz" (newQuizEvent)="displayQuizDetails($event)"></app-game-bank>
+            <div class="buttons">
+                <button type="button" class="game-button" *ngIf="displayedQuiz" (click)="checkQuizAvailability(displayedQuiz, true)">
+                    Lancer partie
+                </button>
+                <button
+                    type="button"
+                    class="game-button"
+                    *ngIf="displayedQuiz && !isQuizRandom"
+                    (click)="checkQuizAvailability(displayedQuiz, false)"
+                >
+                    Tester Jeu
+                </button>
+            </div>
+        </section>
+    </div>
+</div>

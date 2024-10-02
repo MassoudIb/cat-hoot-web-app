@@ -1,0 +1,124 @@
+<div *ngIf="quizData">
+    <div id="quiz">
+        <div id="header-quiz" class="text">
+            <div id="title-quiz">
+                <b>{{ quizData[0].title }}</b>
+            </div>
+            <div id="timer" class="timer-container">
+                <audio id="panicMode" src="assets/sounds/panic-sound.mp3"></audio>
+                <svg width="120" height="120">
+                    <circle
+                        cx="60"
+                        cy="60"
+                        r="54"
+                        stroke-width="12"
+                        fill="black"
+                        transform="rotate(-90 60 60)"
+                        [attr.stroke]="getCircleColor(timeRemaining)"
+                        [attr.stroke-dasharray]="getCircleDashArray()"
+                        [attr.stroke-dashoffset]="getCircleDashOffset(timeRemaining)"
+                    ></circle>
+                </svg>
+                <b class="time-text" [ngClass]="{ 'glowing-effect': timeRemaining < 10 }" [@growShrink]="timeRemaining">{{ timeRemaining }}</b>
+            </div>
+        </div>
+        <div id="description-question">
+            <div id="cat-pts">
+                <img id="cat-image" src="assets/cat_pts.png" alt="TheCatIndicateValue" width="50%" />
+                <div class="text" id="value-question">{{ getCurrentQuestion().points }} pts</div>
+            </div>
+
+            <div class="text" id="text-question">{{ getCurrentQuestion().text }} <br /></div>
+
+            <div class="text" *ngIf="isCorrectAnswer === 'Correct'">
+                Bien joué ! <b class="text-bonus" *ngIf="isBonus">T'es le premier à soumettre la/les bonnes réponses (bonus de 20%)</b>
+            </div>
+            <div class="text" *ngIf="isCorrectAnswer === 'Incorrect'">
+                Mauvaise(s) réponses(s) ! La/Les réponses :
+                <li *ngFor="let choice of getGoodAnswerQuestion()">
+                    {{ choice.text }}
+                </li>
+            </div>
+        </div>
+        <div *ngIf="waitingCorrection && isQuestionFinished" class="waitingCorrection">
+            <img src="assets\image\busy-cat-ezgif.com-resize.gif" />
+            <p class="waitingCorrectionText">En attente de la correction</p>
+        </div>
+        <div *ngIf="waitingCorrection === false && isQuestionFinished" class="waitingCorrection">
+            <p class="waitingCorrectionText">En attente de la prochaine question</p>
+        </div>
+        <div *ngIf="this.quizData[0].questions[this.currentQuestionIndex].type === 'QCM'" id="choice-buttons">
+            <div *ngIf="isQuestionFinished === false" class="button-container">
+                <button
+                    *ngFor="let choice of getCurrentQuestion().choices; let i = index"
+                    (click)="toggleAnswerSelection(choice.text)"
+                    (keydown)="handleKeyPress($event)"
+                    [disabled]="!isNotAlreadyAnswer"
+                    [ngClass]="{ active: isSelected(choice.text) }"
+                    class="buttonAllChoices"
+                >
+                    ({{ i + 1 }})<br />
+                    {{ choice.text }}
+                </button>
+            </div>
+
+            <div *ngIf="isQuestionFinished === true && this.currentQuestionIndex < this.quizData[0].questions.length - 1" class="button-container">
+                <button *ngFor="let choice of getGoodAnswerQuestion()" id="buttonGoodAnswer">
+                    {{ choice.text }}
+                </button>
+
+                <button *ngFor="let choice of getWrongAnswerQuestion()" id="buttonWrongAnswer">
+                    {{ choice.text }}
+                </button>
+            </div>
+
+            <div *ngIf="isQuestionFinished === true && !(this.currentQuestionIndex < this.quizData[0].questions.length - 1)" class="button-container">
+                <button *ngFor="let choice of getGoodAnswerQuestion()" id="buttonGoodAnswer">
+                    {{ choice.text }}
+                </button>
+
+                <button *ngFor="let choice of getWrongAnswerQuestion()" id="buttonWrongAnswer">
+                    {{ choice.text }}
+                </button>
+
+                <div class="text" id="messageGameFinished">
+                    Merci d'avoir joué le jeu ! Vous pouvez attendre l'organisateur qui vous amène à la page des résultats ou quitter la partie.
+                    ≽^•⩊•^≼
+                </div>
+            </div>
+        </div>
+
+        <div
+            *ngIf="this.quizData[0].questions[this.currentQuestionIndex].type === 'QRL' && !isQuestionFinished && !isSubmitted"
+            id="qrl-input-container"
+        >
+            <div id="qrl-input-container">
+                <div class="input-wrapper">
+                    <textarea
+                        id="qrl-answer-input"
+                        placeholder="Veuillez taper votre réponse ici"
+                        [(ngModel)]="qrlAnswer"
+                        maxlength="200"
+                        rows="4"
+                        (input)="getAnwserQrl(qrlAnswer)"
+                    ></textarea>
+                </div>
+                <div id="counter-container">
+                    <span id="char-counter">{{ qrlAnswer.length }}/200</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="container-submit-anwser" *ngIf="!isQuestionFinished">
+            <div *ngIf="isNotAlreadyAnswer; else isAlreadyAnswer">
+                <button id="button-submit-anwser" mat-raised-button (click)="submitAnswer(isTimerOver)" (keydown.enter)="submitAnswer(isTimerOver)">
+                    SOUMETTRE
+                </button>
+            </div>
+
+            <ng-template #isAlreadyAnswer>
+                <div class="text">Merci de confirmer votre/vos réponse(s) ! ฅ^._.^ฅ</div>
+            </ng-template>
+        </div>
+    </div>
+</div>

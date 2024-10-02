@@ -1,0 +1,98 @@
+.historique-title {
+    position: relative;
+    font-size: 3rem;
+    color: #8b3be0;
+    background: -webkit-linear-gradient(#532cdf, #b30c89);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 50px;
+    text-shadow: 10px 10px 10px rgba(150, 150, 150, 0.5);
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+#container {
+    background-image: url('../../../assets/image/Background10.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 2px;
+    border-radius: 8px;
+    width: 100%;
+    margin: auto;
+}
+
+th img {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-left: 5px;
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
+}
+
+th img:hover {
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+th img:active {
+    transform: scale(0.9);
+    filter: brightness(0.8);
+}
+
+.games-table {
+    background-color: #fff;
+    width: 80%;
+    align-items: center;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0 auto;
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f9f9f9;
+    }
+}
+
+.deleteHistory {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    button {
+        position: relative;
+        padding: 10px 20px;
+        margin: 10px;
+        border: none;
+        border-radius: 15px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.3s ease;
+        background-image: linear-gradient(45deg, #6e45e2 0%, #88d3ce 100%);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+
+        &:hover {
+            box-shadow: 0 12px 10px rgba(0, 0, 0, 0.3);
+            transform: scale(1.05);
+            background-image: linear-gradient(to right, #00eeff, #b67eff);
+        }
+
+        &:active {
+            transform: scale(0.95);
+            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+            background-image: linear-gradient(to right, #6319bc, #ff7eb3);
+        }
+    }
+}

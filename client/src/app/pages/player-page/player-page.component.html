@@ -1,0 +1,21 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<div class="player-page-container">
+    <app-player-header id="player-header"></app-player-header>
+    <div class="content-container">
+        <div class="left-panel">
+            <app-player-scoreboard [score]="score" id="player-scoreboard"></app-player-scoreboard>
+            <div class="button-container">
+                <button mat-raised-button color="warn" id="surrender-button" (click)="goToLeaveGame()">ABANDONNER</button>
+            </div>
+        </div>
+        <div class="center-panel">
+            <app-player-question-random *ngIf="isRandom" (scoreUpdated)="onScoreUpdated($event)" id="player-question"></app-player-question-random>
+            <app-player-question *ngIf="!isTest && !isRandom" (scoreUpdated)="onScoreUpdated($event)" id="player-question"></app-player-question>
+            <app-player-question-test *ngIf="isTest" (scoreUpdated)="onScoreUpdated($event)" id="player-question"></app-player-question-test>
+        </div>
+
+        <div class="right-panel">
+            <app-player-chat id="player-chat" [usernameChat]="username" [roomCode]="roomCode" [roomMessages]="roomMessages"></app-player-chat>
+        </div>
+    </div>
+</div>

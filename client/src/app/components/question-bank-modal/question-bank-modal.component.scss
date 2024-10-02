@@ -1,0 +1,43 @@
+#question-bank-container{
+    background-image: url('../../../assets/image/Background9.png');
+    background-position: center;
+    padding: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#title {
+    text-align: center;
+    font-size: 2em;
+    font-size: 3rem;
+    color: #8b3be0;
+    background: -webkit-linear-gradient(#532cdf, #b30c89);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+    text-shadow: 10px 10px 10px rgba(150, 150, 150, 0.5);
+}
+
+#all-questions {
+    background-color: rgba(241, 243, 245, 0.658);
+    border-radius: 10px;
+    border: 2px solid #777373;
+    padding: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    list-style-type: none;
+}
+
+#question-item {
+    transition:
+        background-color 0.3s,
+        color 0.3s;
+    margin: 10px;
+}
+
+#question-item:hover,
+#question-item.hovered {
+    color: #4f9219;
+    font-weight: bold;
+}
+

@@ -1,0 +1,48 @@
+<div class="main-container">
+    <header class="header">
+        <div class="menu-wrapper">
+            <button type="button" class="menu-button" routerLink="/">
+                <img src="./assets/logo-Cathoot.png" alt="Menu" />
+            </button>
+        </div>
+        <div class="title-container">
+            <div class="title">
+                <h1>{{ title }}</h1>
+            </div>
+        </div>
+    </header>
+    <div class="game-info-container">
+        <div class="players-container">
+            <ul class="players-list">
+                <li class="list-title">Liste de joueurs</li>
+                <li *ngFor="let player of listOfPlayers; let pos = index">
+                    {{ pos + 1 + ') ' + player }}
+                    <button (click)="removePlayer(player)">Exclure</button>
+                    <marquee behavior="scroll" direction="right">
+                        <img src="assets/image/when-chubby-cats-escape-cat.gif" alt="Cute Cat" style="width: 50px; height: auto" />
+                    </marquee>
+                </li>
+            </ul>
+        </div>
+        <div class="room-code">
+            <h1>Code du jeu: {{ roomCode }}</h1>
+            <div class="lock-container">
+                <p class="switch-title">Verrouiller la salle</p>
+                <label class="switch">
+                    <input type="checkbox" [checked]="isRoomLocked" (change)="toggleLockRoom()" hidden />
+                    <span class="slider round"></span>
+                    <img src="assets/image/lock.png" *ngIf="isRoomLocked" class="lock-icon" />
+                    <img src="assets/image/lock-open-variant.png" *ngIf="!isRoomLocked" class="lock-icon" />
+                </label>
+            </div>
+            <div class="start-button" *ngIf="listOfPlayers.length > 0 || isQuizRandom">
+                <button (click)="openDialogboxWaiting()" [disabled]="!canStartGame()">Débuter Partie!</button>
+            </div>
+        </div>
+
+        <div class="chat-container">
+            <app-player-chat [usernameChat]="organizerName" [roomCode]="roomCode" [roomMessages]="roomMessages"></app-player-chat>
+        </div>
+        <img src="assets/image/cat-walking.gif" class="bottom-left-cat" alt="Walking Cat" />
+    </div>
+</div>

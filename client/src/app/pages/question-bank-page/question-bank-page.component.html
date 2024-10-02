@@ -1,0 +1,115 @@
+<div class="question-bank-form">
+    <h1 class="question-title">Gestion de la Banque de Questions</h1>
+
+    <div id="buttons-filter" class="align-center">
+        <button [ngClass]="{ active: activeFilter === 'QRL' }" (click)="toggleNotDisplayQuestion('QRL')">Afficher les questions de QCM</button>
+        <button [ngClass]="{ active: activeFilter === 'QCM' }" (click)="toggleNotDisplayQuestion('QCM')">Afficher les questions de QRL</button>
+    </div>
+
+    <div id="button-openModify" class="add-question-section">
+        <button [ngClass]="{ active: openModify === true }" (click)="openModifyBox('QCM')">
+            Création d'une question
+            <img *ngIf="openModify" src="assets/image/arrow-down-bold-circle.png" alt="Arrow Down" class="arrow-icon" />
+            <img *ngIf="!openModify" src="assets/image/arrow-up-bold-circle.png" alt="Arrow Up" class="arrow-icon" />
+        </button>
+
+        <div *ngIf="openModify">
+            <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+                <div class="align-center">
+                    <b>Type de question : </b>
+                    <div
+                        class="toggle-container"
+                        [class.is-qcm]="this.questionForm.get('type')?.value === 'QRL'"
+                        (click)="toggleQuestionType(this.questionForm.get('type')?.value === 'QRL' ? 'QCM' : 'QRL')"
+                    >
+                        <span class="toggle-label qrl-label">QRL</span>
+                        <span class="toggle-button"></span>
+                        <span class="toggle-label qcm-label">QCM</span>
+                    </div>
+                </div>
+
+                <div class="align-center">
+                    <b>Description : </b>
+                    <input formControlName="text" placeholder="Texte de la question" />
+                </div>
+
+                <div>
+                    <b>Score alloué : </b>
+                    <select id="select-points" formControlName="points">
+                        <option value="">Score</option>
+                        <option *ngFor="let points of pointsOptions" [value]="points">{{ points }}</option>
+                    </select>
+                </div>
+
+                <div *ngIf="this.questionForm.get('type')?.value === 'QCM'" formArrayName="choices">
+                    <div class="choices" *ngFor="let choice of getChoices().controls; let i = index" [formGroupName]="i">
+                        <b>Choix #{{ i + 1 }} :</b>
+                        <input formControlName="text" placeholder="Texte du choix" />
+                        <input type="checkbox" formControlName="isCorrect" /> Correct
+                        <button class="button-delete-choice" type="button" (click)="removeChoice(i)">Supprimer ce choix</button>
+                    </div>
+                </div>
+
+                <div *ngIf="this.questionForm.get('type')?.value === 'QCM'" formArrayName="choices">
+                    <button type="button" (click)="addChoice()">Ajouter un choix</button>
+                </div>
+
+                <button type="submit">Enregistrer la question</button>
+            </form>
+        </div>
+    </div>
+
+    <div *ngFor="let question of questions; let i = index">
+        <div class="question-item" *ngIf="questions[i].type !== activeFilter">
+            <p style="text-align: center">
+                <b>Type de question : {{ questions[i].type }}</b>
+            </p>
+            <p style="text-align: center">
+                <i>Date de modification : {{ question.lastModified | date: 'medium' }} </i>
+            </p>
+
+            <p>
+                <b>Question ({{ question.points }} points) : </b> {{ question.text }}
+            </p>
+            <div style="margin-bottom: 10px" *ngFor="let choice of question.choices; let j = index">
+                <b>Choix #{{ j + 1 }} : </b>
+                <span [ngClass]="{ correct: choice.isCorrect, incorrect: !choice.isCorrect }">
+                    {{ choice.text }} - {{ choice.isCorrect ? 'Vrai' : 'Faux' }}
+                </span>
+            </div>
+            <button (click)="startEditQuestion(i)">Modifier</button>
+            <button class="button-delete-choice" (click)="deleteQuestion(question)">Supprimer</button>
+
+            <div *ngIf="editingIndex === i">
+                <form id="edit-modification" [formGroup]="editingForm" (ngSubmit)="submitEdit()">
+                    <div class="align-center">
+                        <b>Description : </b>
+                        <input formControlName="text" placeholder="Texte de la question" />
+                    </div>
+
+                    <div>
+                        <b>Score alloué : </b>
+                        <select class="select-points" formControlName="points">
+                            <option value="">Score</option>
+                            <option *ngFor="let points of pointsOptions" [value]="points">{{ points }}</option>
+                        </select>
+                    </div>
+
+                    <div *ngIf="typeQuestion === 'QCM'" formArrayName="choices">
+                        <div
+                            class="choices"
+                            style="margin-bottom: 20px"
+                            *ngFor="let choice of getEditChoices().controls; let qIndex = index"
+                            [formGroupName]="qIndex"
+                        >
+                            <b>Choix #{{ qIndex + 1 }} :</b>
+                            <input formControlName="text" placeholder="Texte du choix" />
+                            <input type="checkbox" formControlName="isCorrect" /> Correct
+                        </div>
+                    </div>
+                    <button type="submit">Mettre à jour la question</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

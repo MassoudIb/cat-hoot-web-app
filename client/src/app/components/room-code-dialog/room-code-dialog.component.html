@@ -1,0 +1,5 @@
+<div class="dialog-content">
+    <input #codeInput id="code" type="text" (keyup.enter)="validateCode(codeInput.value)" placeholder="Code du jeu" />
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+    <button class="dialog-button" (click)="validateCode(codeInput.value)">Entrer</button>
+</div>

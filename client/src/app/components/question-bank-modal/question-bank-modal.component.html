@@ -1,0 +1,22 @@
+<div id="question-bank-container" style="overflow-y: auto;">
+    <div id="title">
+        <b>Banque de questions</b>
+    </div>
+    <div id="all-questions">
+        <div *ngFor="let question of data.questions; let i = index"
+            id="question-item"
+            [class.hovered]="hoveredQuestion === question"
+            (mouseenter)="hoveredQuestion = question"
+            (mouseleave)="hoveredQuestion = null">
+            <div (click)="selectQuestion(question)">
+                <div *ngIf="question.type === 'QCM'">
+                    <b>{{i+1}}. QCM - </b> {{ question.text }}
+                </div>
+
+                <div *ngIf="question.type === 'QRL'">
+                    <b>{{i+1}}. QRL - </b> {{ question.text }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

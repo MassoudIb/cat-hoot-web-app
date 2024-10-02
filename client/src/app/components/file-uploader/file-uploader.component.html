@@ -1,0 +1,21 @@
+<div class="import-container">
+    <input
+        type="file"
+        accept="application/JSON"
+        [attr.multiple]="allowMultipleFiles ? '' : null"
+        (change)="onFileChanged($event)"
+        #fileImportRef
+    />
+
+    <div *ngIf="!!file && !isUploaded" class="imported-game">
+        <p [ngClass]="{ 'error-alert': !isInputCorrect }">
+            <b>
+                {{ isInputCorrect ? 'IMPORTÉ - ' + file.name : 'ERREUR - ' + errorMessage }}
+            </b>
+        </p>
+    </div>
+    <div>
+        <button class="upload-buttons" (click)="fileImportRef.click()">Importer un quiz</button>
+        <button class="upload-buttons" *ngIf="isInputCorrect && !isUploaded" (click)="this.saveQuiz()">Téléverser</button>
+    </div>
+</div>
